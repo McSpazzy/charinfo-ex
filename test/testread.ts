@@ -15,6 +15,4 @@ console.log(charData.toJson())
 
 if (pathOut) {
     fs.writeFileSync(pathOut, JSON.stringify(charData, null, 2));
-} else {
-  
 }

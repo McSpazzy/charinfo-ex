@@ -1,12 +1,18 @@
 export declare class CharInfoEx {
     constructor();
     private static bytesToUuidV4;
+    private static uuidV4ToBytes;
+    private static writeStringUTF16Fixed;
     static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike): CharInfoEx[];
     static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, index: number): CharInfoEx;
     static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, indexes: number[]): CharInfoEx[];
     static FromArrayLike(arrayLike: Iterable<number>): CharInfoEx;
     static FromArrayBuffer(buffer: ArrayBufferLike): CharInfoEx;
+    ToArrayBuffer(): ArrayBuffer;
+    static ToArrayBuffer(charInfo: CharInfoEx): ArrayBuffer;
     toJson(pretty?: boolean): string;
+    static fromJson(jsonString: string): CharInfoEx;
+    static fromJson(jsonString: string): CharInfoEx[];
     uuidv4: string;
     name: string;
     fontRegion: number;

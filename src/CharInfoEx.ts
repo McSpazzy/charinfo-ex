@@ -8,6 +8,28 @@ export class CharInfoEx {
     return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20, 32)}`;
   }
 
+  private static uuidV4ToBytes(uuid: string): Uint8Array {
+    const out = new Uint8Array(16);
+    const hex = (uuid || "").replace(/-/g, "").toLowerCase();
+    if (!/^[0-9a-f]{32}$/.test(hex)) {
+      return out;
+    }
+
+    for (let i = 0; i < 16; i++) {
+      out[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16);
+    }
+
+    return out;
+  }
+
+  private static writeStringUTF16Fixed(data: DataView, offset: number, maxChars: number, value: string, littleEndian = true): void {
+    const text = value ?? "";
+    for (let i = 0; i < maxChars; i++) {
+      const codeUnit = i < text.length ? text.charCodeAt(i) : 0;
+      data.setUint16(offset + i * 2, codeUnit, littleEndian);
+    }
+  }
+
   public static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike): CharInfoEx[];
   public static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, index: number): CharInfoEx;
   public static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, indexes: number[]): CharInfoEx[];
@@ -184,12 +206,154 @@ export class CharInfoEx {
     return charItem;
   }
 
+  public ToArrayBuffer(): ArrayBuffer {
+    const buffer = new ArrayBuffer(152);
+    const dataView = new DataView(buffer);
+
+    const u8 = (offset: CharInfoOffset, value: number) => dataView.setUint8(offset, value & 0xff);
+    const u16 = (offset: CharInfoOffset, value: number) => dataView.setUint16(offset, value & 0xffff, true);
+
+    new Uint8Array(buffer, CharInfoOffset.createId1, 16).set(CharInfoEx.uuidV4ToBytes(this.uuidv4));
+    CharInfoEx.writeStringUTF16Fixed(dataView, CharInfoOffset.name, 11, this.name);
+    u8(CharInfoOffset.fontRegion, this.fontRegion);
+    u8(CharInfoOffset.gender, this.gender);
+    u8(CharInfoOffset.height, this.height);
+    u8(CharInfoOffset.build, this.build);
+    u8(CharInfoOffset.regionMove, this.regionMove);
+    u8(CharInfoOffset.faceFlags, this.faceFlags);
+    u8(CharInfoOffset.facelineType, this.facelineType);
+    u8(CharInfoOffset.facelineColor, this.facelineColor);
+    u8(CharInfoOffset.wrinkleLower, this.wrinkleLower);
+    u8(CharInfoOffset.wrinkleLowerScale, this.wrinkleLowerScale);
+    u8(CharInfoOffset.wrinkleLowerAspect, this.wrinkleLowerAspect);
+    u8(CharInfoOffset.wrinkleLowerX, this.wrinkleLowerX);
+    u8(CharInfoOffset.wrinkleLowerY, this.wrinkleLowerY);
+    u8(CharInfoOffset.wrinkleUpper, this.wrinkleUpper);
+    u8(CharInfoOffset.wrinkleUpperScale, this.wrinkleUpperScale);
+    u8(CharInfoOffset.wrinkleUpperAspect, this.wrinkleUpperAspect);
+    u8(CharInfoOffset.wrinkleUpperX, this.wrinkleUpperX);
+    u8(CharInfoOffset.wrinkleUpperY, this.wrinkleUpperY);
+    u8(CharInfoOffset.makeup0, this.makeup0);
+    u8(CharInfoOffset.makeup0Color, this.makeup0Color);
+    u8(CharInfoOffset.makeup0Scale, this.makeup0Scale);
+    u8(CharInfoOffset.makeup0Aspect, this.makeup0Aspect);
+    u8(CharInfoOffset.makeup0X, this.makeup0X);
+    u8(CharInfoOffset.makeup0Y, this.makeup0Y);
+    u8(CharInfoOffset.makeup1, this.makeup1);
+    u8(CharInfoOffset.makeup1Color, this.makeup1Color);
+    u8(CharInfoOffset.makeup1Scale, this.makeup1Scale);
+    u8(CharInfoOffset.makeup1Aspect, this.makeup1Aspect);
+    u8(CharInfoOffset.makeup1X, this.makeup1X);
+    u8(CharInfoOffset.makeup1Y, this.makeup1Y);
+    u16(CharInfoOffset.hairType, this.hairType);
+    u8(CharInfoOffset.hairColor0, this.hairColor0);
+    u8(CharInfoOffset.hairColor1, this.hairColor1);
+    u8(CharInfoOffset.hairTypeFront, this.hairTypeFront);
+    u8(CharInfoOffset.hairTypeBack, this.hairTypeBack);
+    u8(CharInfoOffset.hairStyle, this.hairStyle);
+    u8(CharInfoOffset.earType, this.earType);
+    u8(CharInfoOffset.earScale, this.earScale);
+    u8(CharInfoOffset.earY, this.earY);
+    u8(CharInfoOffset.eyeType, this.eyeType);
+    u8(CharInfoOffset.eyeColor, this.eyeColor);
+    u8(CharInfoOffset.eyeScale, this.eyeScale);
+    u8(CharInfoOffset.eyeAspect, this.eyeAspect);
+    u8(CharInfoOffset.eyeRotate, this.eyeRotate);
+    u8(CharInfoOffset.eyeX, this.eyeX);
+    u8(CharInfoOffset.eyeY, this.eyeY);
+    u8(CharInfoOffset.eyeShadowColor, this.eyeShadowColor);
+    u8(CharInfoOffset.eyeHighlightType, this.eyeHighlightType);
+    u8(CharInfoOffset.eyeHighlightScale, this.eyeHighlightScale);
+    u8(CharInfoOffset.eyeHighlightAspect, this.eyeHighlightAspect);
+    u8(CharInfoOffset.eyeHighlightRotate, this.eyeHighlightRotate);
+    u8(CharInfoOffset.eyeHighlightX, this.eyeHighlightX);
+    u8(CharInfoOffset.eyeHighlightY, this.eyeHighlightY);
+    u8(CharInfoOffset.eyelashUpperType, this.eyelashUpperType);
+    u8(CharInfoOffset.eyelashUpperScale, this.eyelashUpperScale);
+    u8(CharInfoOffset.eyelashUpperAspect, this.eyelashUpperAspect);
+    u8(CharInfoOffset.eyelashUpperRotate, this.eyelashUpperRotate);
+    u8(CharInfoOffset.eyelashUpperX, this.eyelashUpperX);
+    u8(CharInfoOffset.eyelashUpperY, this.eyelashUpperY);
+    u8(CharInfoOffset.eyelashLowerType, this.eyelashLowerType);
+    u8(CharInfoOffset.eyelashLowerScale, this.eyelashLowerScale);
+    u8(CharInfoOffset.eyelashLowerAspect, this.eyelashLowerAspect);
+    u8(CharInfoOffset.eyelashLowerRotate, this.eyelashLowerRotate);
+    u8(CharInfoOffset.eyelashLowerX, this.eyelashLowerX);
+    u8(CharInfoOffset.eyelashLowerY, this.eyelashLowerY);
+    u8(CharInfoOffset.eyeLidUpperType, this.eyeLidUpperType);
+    u8(CharInfoOffset.eyeLidUpperScale, this.eyeLidUpperScale);
+    u8(CharInfoOffset.eyeLidUpperAspect, this.eyeLidUpperAspect);
+    u8(CharInfoOffset.eyeLidUpperRotate, this.eyeLidUpperRotate);
+    u8(CharInfoOffset.eyeLidUpperX, this.eyeLidUpperX);
+    u8(CharInfoOffset.eyeLidUpperY, this.eyeLidUpperY);
+    u8(CharInfoOffset.eyelidLowerType, this.eyelidLowerType);
+    u8(CharInfoOffset.eyelidLowerScale, this.eyelidLowerScale);
+    u8(CharInfoOffset.eyelidLowerAspect, this.eyelidLowerAspect);
+    u8(CharInfoOffset.eyelidLowerRotate, this.eyelidLowerRotate);
+    u8(CharInfoOffset.eyelidLowerX, this.eyelidLowerX);
+    u8(CharInfoOffset.eyelidLowerY, this.eyelidLowerY);
+    u8(CharInfoOffset.eyebrowType, this.eyebrowType);
+    u8(CharInfoOffset.eyebrowColor, this.eyebrowColor);
+    u8(CharInfoOffset.eyebrowScale, this.eyebrowScale);
+    u8(CharInfoOffset.eyebrowAspect, this.eyebrowAspect);
+    u8(CharInfoOffset.eyebrowRotate, this.eyebrowRotate);
+    u8(CharInfoOffset.eyebrowX, this.eyebrowX);
+    u8(CharInfoOffset.eyebrowY, this.eyebrowY);
+    u8(CharInfoOffset.noseType, this.noseType);
+    u8(CharInfoOffset.noseScale, this.noseScale);
+    u8(CharInfoOffset.noseY, this.noseY);
+    u8(CharInfoOffset.mouthType, this.mouthType);
+    u8(CharInfoOffset.mouthColor, this.mouthColor);
+    u8(CharInfoOffset.mouthScale, this.mouthScale);
+    u8(CharInfoOffset.mouthAspect, this.mouthAspect);
+    u8(CharInfoOffset.mouthRotate, this.mouthRotate);
+    u8(CharInfoOffset.mouthY, this.mouthY);
+    u8(CharInfoOffset.beardType, this.beardType);
+    u8(CharInfoOffset.beardColor, this.beardColor);
+    u8(CharInfoOffset.beardShortType, this.beardShortType);
+    u8(CharInfoOffset.beardShortColor, this.beardShortColor);
+    u8(CharInfoOffset.mustacheType, this.mustacheType);
+    u8(CharInfoOffset.mustacheColor, this.mustacheColor);
+    u8(CharInfoOffset.mustacheScale, this.mustacheScale);
+    u8(CharInfoOffset.mustacheAspect, this.mustacheAspect);
+    u8(CharInfoOffset.mustacheY, this.mustacheY);
+    u8(CharInfoOffset.glassType1, this.glassType1);
+    u8(CharInfoOffset.glassColor1, this.glassColor1);
+    u8(CharInfoOffset.glassScale, this.glassScale);
+    u8(CharInfoOffset.glassAspect, this.glassAspect);
+    u8(CharInfoOffset.glassY, this.glassY);
+    u8(CharInfoOffset.glassType2, this.glassType2);
+    u8(CharInfoOffset.glassColor2, this.glassColor2);
+    u8(CharInfoOffset.moleScale, this.moleScale);
+    u8(CharInfoOffset.moleX, this.moleX);
+    u8(CharInfoOffset.moleY, this.moleY);
+    u8(CharInfoOffset.unkDefault45, this.unkDefault45);
+
+    return buffer;
+  }
+
+  public static ToArrayBuffer(charInfo: CharInfoEx): ArrayBuffer {
+    return charInfo.ToArrayBuffer();
+  }
+
   public toJson(pretty: boolean = true): string {
     if (pretty) {
       return JSON.stringify(this, null, 4);
     } else {
       return JSON.stringify(this);
     }
+  }
+
+  public static fromJson(jsonString: string): CharInfoEx;
+  public static fromJson(jsonString: string): CharInfoEx[];
+  public static fromJson(jsonString: string): CharInfoEx | CharInfoEx[] {
+    const parsed = JSON.parse(jsonString);
+
+    if (Array.isArray(parsed)) {
+      return parsed.map((item) => Object.assign(new CharInfoEx(), item));
+    }
+
+    return Object.assign(new CharInfoEx(), parsed);
   }
 
   uuidv4: string = "";
