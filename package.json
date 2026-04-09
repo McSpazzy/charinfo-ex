@@ -2,9 +2,26 @@
   "name": "charinfo-ex",
   "version": "0.0.4",
   "description": "Package for reading and writing Tomodachi Life character data",
-  "main": "./lib/index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.mjs",
+  "types": "./lib/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/cjs/index.d.ts",
+      "import": "./lib/esm/index.mjs",
+      "require": "./lib/cjs/index.js"
+    },
+    "./*": {
+      "types": "./lib/cjs/*.d.ts",
+      "import": "./lib/esm/*.mjs",
+      "require": "./lib/cjs/*.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "node -e \"require('fs').rmSync('lib',{recursive:true,force:true})\" && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsup src/*.ts --format esm --outDir lib/esm --clean",
+    "build:cjs": "tsup src/*.ts --format cjs --dts --outDir lib/cjs --clean",
     "test-read": "ts-node ./test/testread.ts ./test/mii.sav ./test/mii.json"
   },
   "author": "McSpazzy",
@@ -12,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^20.4.5",
     "ts-node": "^10.9.1",
+    "tsup": "^8.5.1",
     "typescript": "^5.1.6"
   },
   "repository": {
@@ -21,8 +39,5 @@
   "homepage": "https://github.com/McSpazzy/charinfo-ex",
   "bugs": {
     "url": "https://github.com/McSpazzy/charinfo-ex/issues"
-  },
-  "dependencies": {
-
   }
 }

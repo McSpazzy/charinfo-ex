@@ -1,4 +1,4 @@
-export declare class CharInfoEx {
+declare class CharInfoEx {
     constructor();
     private static bytesToUuidV4;
     private static uuidV4ToBytes;
@@ -129,3 +129,5 @@ export declare class CharInfoEx {
     moleY: number;
     unkDefault45: number;
 }
+
+export { CharInfoEx };

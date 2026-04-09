@@ -4,7 +4,7 @@
 
 - Add the color array and color order data.
 - Add turning CharInfoEx back into a ArrayBuffer
-
+- Add support for both cjs and esm
 
 ## [0.0.3] - 2026-04-09
 
