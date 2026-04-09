@@ -1,6 +1,6 @@
 {
   "name": "charinfo-ex",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Package for reading and writing Tomodachi Life character data",
   "main": "./lib/index.js",
   "scripts": {

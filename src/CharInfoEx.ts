@@ -34,7 +34,7 @@ export class CharInfoEx {
     exPosition += 4;
 
     const charArray: CharInfoEx[] = [];
-    for (let index = 0; index < 2; index++) {
+    for (let index = 0; index < entryPositionCount; index++) {
       const len = data.getUint32(exPosition, true);
       exPosition += 4;
       const charInfo = CharInfoEx.FromArrayBuffer(saveBuffer.slice(exPosition, exPosition + len));
