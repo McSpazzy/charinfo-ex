@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.5] - 2026-04-10
+
+- Add reading support for ShareMii .ltd files that probably works
+
+
 ## [0.0.4] - 2026-04-10
 
 - Add the color array and color order data.

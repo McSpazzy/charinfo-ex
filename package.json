@@ -1,10 +1,10 @@
 {
   "name": "charinfo-ex",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Package for reading and writing Tomodachi Life character data",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.mjs",
-  "types": "./lib/cjs/index.d.ts",
+  "types": "./lib/types/index.d.ts",
   "files": [
     "lib/**",
     "README.md",
@@ -13,43 +13,45 @@
   ],
   "exports": {
     ".": {
-      "types": "./lib/cjs/index.d.ts",
+      "types": "./lib/types/index.d.ts",
       "import": "./lib/esm/index.mjs",
       "require": "./lib/cjs/index.js"
     },
     "./CharInfoEx": {
-      "types": "./lib/cjs/CharInfoEx.d.ts",
+      "types": "./lib/types/CharInfoEx.d.ts",
       "import": "./lib/esm/CharInfoEx.mjs",
       "require": "./lib/cjs/CharInfoEx.js"
     },
     "./CharInfoOffset": {
-      "types": "./lib/cjs/CharInfoOffset.d.ts",
+      "types": "./lib/types/CharInfoOffset.d.ts",
       "import": "./lib/esm/CharInfoOffset.mjs",
       "require": "./lib/cjs/CharInfoOffset.js"
     },
     "./ColorIndex": {
-      "types": "./lib/cjs/ColorIndex.d.ts",
+      "types": "./lib/types/ColorIndex.d.ts",
       "import": "./lib/esm/ColorIndex.mjs",
       "require": "./lib/cjs/ColorIndex.js"
     },
     "./ColorOrder": {
-      "types": "./lib/cjs/ColorOrder.d.ts",
+      "types": "./lib/types/ColorOrder.d.ts",
       "import": "./lib/esm/ColorOrder.mjs",
       "require": "./lib/cjs/ColorOrder.js"
     },
     "./Helpers": {
-      "types": "./lib/cjs/Helpers.d.ts",
+      "types": "./lib/types/Helpers.d.ts",
       "import": "./lib/esm/Helpers.mjs",
       "require": "./lib/cjs/Helpers.js"
     },
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "npm run build:esm && npm run build:cjs",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types",
     "build:esm": "tsup src/*.ts --format esm --outDir lib/esm --clean --splitting false",
-    "build:cjs": "tsup src/*.ts --format cjs --dts --outDir lib/cjs --clean",
+    "build:cjs": "tsup src/*.ts --format cjs --outDir lib/cjs --clean",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationMap false --outDir lib/types --rootDir src",
     "test": "npm run test-read && npm run test-json",
     "test-read": "tsx ./test/testread.ts ./test/mii.sav ./test/mii.json",
+    "test-sharemii": "tsx ./test/testsharemii.ts ./test/mii.ltd",
     "test-json": "tsx ./test/testwrite.ts ./test/mii.json"
   },
   "author": "McSpazzy",

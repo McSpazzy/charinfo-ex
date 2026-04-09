@@ -1,8 +1,9 @@
-declare class CharInfoEx {
+export declare class CharInfoEx {
     constructor();
     private static bytesToUuidV4;
     private static uuidV4ToBytes;
     private static writeStringUTF16Fixed;
+    static FromShareMiiFileArrayBuffer(saveBuffer: ArrayBufferLike): CharInfoEx;
     static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike): CharInfoEx[];
     static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, index: number): CharInfoEx;
     static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, indexes: number[]): CharInfoEx[];
@@ -129,5 +130,3 @@ declare class CharInfoEx {
     moleY: number;
     unkDefault45: number;
 }
-
-export { CharInfoEx };

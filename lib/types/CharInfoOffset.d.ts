@@ -1,4 +1,4 @@
-declare enum CharInfoOffset {
+export declare enum CharInfoOffset {
     createId1 = 0,//s32
     createId2 = 4,//s32
     createId3 = 8,//s32
@@ -118,5 +118,3 @@ declare enum CharInfoOffset {
     moleY = 150,// u8
     unkDefault45 = 151
 }
-
-export { CharInfoOffset };

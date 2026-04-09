@@ -30,6 +30,15 @@ export class CharInfoEx {
     }
   }
 
+  public static FromShareMiiFileArrayBuffer(saveBuffer: ArrayBufferLike): CharInfoEx {
+    var data = new DataView(saveBuffer);
+    let offset = 0x5;
+    const len = data.getUint32(offset, true);
+    offset += 4;
+    const charInfo = CharInfoEx.FromArrayBuffer(saveBuffer.slice(offset, offset + len));
+    return charInfo;
+  }
+
   public static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike): CharInfoEx[];
   public static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, index: number): CharInfoEx;
   public static FromSaveFileArrayBuffer(saveBuffer: ArrayBufferLike, indexes: number[]): CharInfoEx[];
