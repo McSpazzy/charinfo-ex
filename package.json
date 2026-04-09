@@ -1,0 +1,28 @@
+{
+  "name": "charinfo-ex",
+  "version": "0.0.1",
+  "description": "Package for reading and writing Tomodachi Life character data",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test-read": "ts-node ./test/testread.ts ./test/mii.sav ./test/mii.json"
+  },
+  "author": "McSpazzy",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McSpazzy/charinfo-ex.git"
+  },
+  "homepage": "https://github.com/McSpazzy/charinfo-ex",
+  "bugs": {
+    "url": "https://github.com/McSpazzy/charinfo-ex/issues"
+  },
+  "dependencies": {
+
+  }
+}
