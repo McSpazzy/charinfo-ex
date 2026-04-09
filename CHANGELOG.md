@@ -6,6 +6,9 @@
 - Add turning CharInfoEx back into a ArrayBuffer
 - Add support for both cjs and esm
 
+- Fix some weirdly named fields
+
+
 ## [0.0.3] - 2026-04-09
 
 - Add `fromJson` to return `CharInfoEx | CharInfoEx[]`.

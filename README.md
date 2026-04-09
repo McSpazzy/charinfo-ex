@@ -9,7 +9,7 @@
 From Save File
 ```js
 import fs from 'fs';
-import { CharInfoEx } from '../src/index';
+import { CharInfoEx } from 'charinfo-ex';
 
 var data = fs.readFileSync('./test/mii.sav');
 var act = CharInfoEx.FromSaveFileArrayBuffer(data.buffer, 1);

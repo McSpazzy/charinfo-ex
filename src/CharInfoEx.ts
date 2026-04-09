@@ -97,12 +97,12 @@ export class CharInfoEx {
     charItem.faceFlags = u8(CharInfoOffset.faceFlags);
     charItem.facelineType = u8(CharInfoOffset.facelineType);
     charItem.facelineColor = u8(CharInfoOffset.facelineColor);
-    charItem.wrinkleLower = u8(CharInfoOffset.wrinkleLower);
+    charItem.wrinkleLowerType = u8(CharInfoOffset.wrinkleLowerType);
     charItem.wrinkleLowerScale = u8(CharInfoOffset.wrinkleLowerScale);
     charItem.wrinkleLowerAspect = u8(CharInfoOffset.wrinkleLowerAspect);
     charItem.wrinkleLowerX = u8(CharInfoOffset.wrinkleLowerX);
     charItem.wrinkleLowerY = u8(CharInfoOffset.wrinkleLowerY);
-    charItem.wrinkleUpper = u8(CharInfoOffset.wrinkleUpper);
+    charItem.wrinkleUpperType = u8(CharInfoOffset.wrinkleUpperType);
     charItem.wrinkleUpperScale = u8(CharInfoOffset.wrinkleUpperScale);
     charItem.wrinkleUpperAspect = u8(CharInfoOffset.wrinkleUpperAspect);
     charItem.wrinkleUpperX = u8(CharInfoOffset.wrinkleUpperX);
@@ -154,12 +154,12 @@ export class CharInfoEx {
     charItem.eyelashLowerRotate = u8(CharInfoOffset.eyelashLowerRotate);
     charItem.eyelashLowerX = u8(CharInfoOffset.eyelashLowerX);
     charItem.eyelashLowerY = u8(CharInfoOffset.eyelashLowerY);
-    charItem.eyeLidUpperType = u8(CharInfoOffset.eyeLidUpperType);
-    charItem.eyeLidUpperScale = u8(CharInfoOffset.eyeLidUpperScale);
-    charItem.eyeLidUpperAspect = u8(CharInfoOffset.eyeLidUpperAspect);
-    charItem.eyeLidUpperRotate = u8(CharInfoOffset.eyeLidUpperRotate);
-    charItem.eyeLidUpperX = u8(CharInfoOffset.eyeLidUpperX);
-    charItem.eyeLidUpperY = u8(CharInfoOffset.eyeLidUpperY);
+    charItem.eyelidUpperType = u8(CharInfoOffset.eyelidUpperType);
+    charItem.eyelidUpperScale = u8(CharInfoOffset.eyelidUpperScale);
+    charItem.eyelidUpperAspect = u8(CharInfoOffset.eyelidUpperAspect);
+    charItem.eyelidUpperRotate = u8(CharInfoOffset.eyelidUpperRotate);
+    charItem.eyelidUpperX = u8(CharInfoOffset.eyelidUpperX);
+    charItem.eyelidUpperY = u8(CharInfoOffset.eyelidUpperY);
     charItem.eyelidLowerType = u8(CharInfoOffset.eyelidLowerType);
     charItem.eyelidLowerScale = u8(CharInfoOffset.eyelidLowerScale);
     charItem.eyelidLowerAspect = u8(CharInfoOffset.eyelidLowerAspect);
@@ -223,12 +223,12 @@ export class CharInfoEx {
     u8(CharInfoOffset.faceFlags, this.faceFlags);
     u8(CharInfoOffset.facelineType, this.facelineType);
     u8(CharInfoOffset.facelineColor, this.facelineColor);
-    u8(CharInfoOffset.wrinkleLower, this.wrinkleLower);
+    u8(CharInfoOffset.wrinkleLowerType, this.wrinkleLowerType);
     u8(CharInfoOffset.wrinkleLowerScale, this.wrinkleLowerScale);
     u8(CharInfoOffset.wrinkleLowerAspect, this.wrinkleLowerAspect);
     u8(CharInfoOffset.wrinkleLowerX, this.wrinkleLowerX);
     u8(CharInfoOffset.wrinkleLowerY, this.wrinkleLowerY);
-    u8(CharInfoOffset.wrinkleUpper, this.wrinkleUpper);
+    u8(CharInfoOffset.wrinkleUpperType, this.wrinkleUpperType);
     u8(CharInfoOffset.wrinkleUpperScale, this.wrinkleUpperScale);
     u8(CharInfoOffset.wrinkleUpperAspect, this.wrinkleUpperAspect);
     u8(CharInfoOffset.wrinkleUpperX, this.wrinkleUpperX);
@@ -280,12 +280,12 @@ export class CharInfoEx {
     u8(CharInfoOffset.eyelashLowerRotate, this.eyelashLowerRotate);
     u8(CharInfoOffset.eyelashLowerX, this.eyelashLowerX);
     u8(CharInfoOffset.eyelashLowerY, this.eyelashLowerY);
-    u8(CharInfoOffset.eyeLidUpperType, this.eyeLidUpperType);
-    u8(CharInfoOffset.eyeLidUpperScale, this.eyeLidUpperScale);
-    u8(CharInfoOffset.eyeLidUpperAspect, this.eyeLidUpperAspect);
-    u8(CharInfoOffset.eyeLidUpperRotate, this.eyeLidUpperRotate);
-    u8(CharInfoOffset.eyeLidUpperX, this.eyeLidUpperX);
-    u8(CharInfoOffset.eyeLidUpperY, this.eyeLidUpperY);
+    u8(CharInfoOffset.eyelidUpperType, this.eyelidUpperType);
+    u8(CharInfoOffset.eyelidUpperScale, this.eyelidUpperScale);
+    u8(CharInfoOffset.eyelidUpperAspect, this.eyelidUpperAspect);
+    u8(CharInfoOffset.eyelidUpperRotate, this.eyelidUpperRotate);
+    u8(CharInfoOffset.eyelidUpperX, this.eyelidUpperX);
+    u8(CharInfoOffset.eyelidUpperY, this.eyelidUpperY);
     u8(CharInfoOffset.eyelidLowerType, this.eyelidLowerType);
     u8(CharInfoOffset.eyelidLowerScale, this.eyelidLowerScale);
     u8(CharInfoOffset.eyelidLowerAspect, this.eyelidLowerAspect);
@@ -366,12 +366,12 @@ export class CharInfoEx {
   faceFlags: number = 0; // u8
   facelineType: number = 0; // u8
   facelineColor: number = 0; // u8
-  wrinkleLower: number = 0; // u8
+  wrinkleLowerType: number = 0; // u8
   wrinkleLowerScale: number = 0; // u8
   wrinkleLowerAspect: number = 0; // u8
   wrinkleLowerX: number = 0; // u8
   wrinkleLowerY: number = 0; // u8
-  wrinkleUpper: number = 0; // u8
+  wrinkleUpperType: number = 0; // u8
   wrinkleUpperScale: number = 0; // u8
   wrinkleUpperAspect: number = 0; // u8
   wrinkleUpperX: number = 0; // u8
@@ -423,12 +423,12 @@ export class CharInfoEx {
   eyelashLowerRotate: number = 0; // u8
   eyelashLowerX: number = 0; // u8
   eyelashLowerY: number = 0; // u8
-  eyeLidUpperType: number = 0; // u8
-  eyeLidUpperScale: number = 0; // u8
-  eyeLidUpperAspect: number = 0; // u8
-  eyeLidUpperRotate: number = 0; // u8
-  eyeLidUpperX: number = 0; // u8
-  eyeLidUpperY: number = 0; // u8
+  eyelidUpperType: number = 0; // u8
+  eyelidUpperScale: number = 0; // u8
+  eyelidUpperAspect: number = 0; // u8
+  eyelidUpperRotate: number = 0; // u8
+  eyelidUpperX: number = 0; // u8
+  eyelidUpperY: number = 0; // u8
   eyelidLowerType: number = 0; // u8
   eyelidLowerScale: number = 0; // u8
   eyelidLowerAspect: number = 0; // u8
